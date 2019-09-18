@@ -1,5 +1,7 @@
 package com.frank;
 
+import org.json.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "ServletAnno", urlPatterns = "/hw")
-public class ServletAnno extends HttpServlet {
+@WebServlet(name = "JsonServlet", urlPatterns = "/js")
+public class JsonServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -16,7 +18,10 @@ public class ServletAnno extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("this is hw ");
-        request.getRequestDispatcher("/hello.jsp").forward(request,response);
+        System.out.println("this is js");
+        JSONObject json = new JSONObject();
+        json.put("key", "this is js");
+        response.setContentType("text/json");
+        json.write(response.getWriter());
     }
 }
